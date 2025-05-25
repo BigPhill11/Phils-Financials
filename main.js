@@ -1,25 +1,14 @@
 
+function showTab(id) {
+    const tabs = document.querySelectorAll('.tab-content');
+    tabs.forEach(tab => tab.style.display = 'none');
+    document.getElementById(id).style.display = 'block';
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-    const content = document.getElementById('content');
-
-    const addSection = (title, body, take) => {
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `<h2>${title}</h2><p>${body}</p><p><em>💬 GPT's Take: ${take}</em></p>`;
-        content.appendChild(card);
-    };
-
-    addSection('Market Recap', data.marketRecap.summary, data.marketRecap.gptTake);
-
-    data.headlines.forEach(headline => {
-        addSection(`Headline: ${headline.title}`, headline.summary, headline.gptTake);
-    });
-
-    addSection('Economic Events', data.events.today.join('<br>'), data.events.gptTake);
-    addSection('M&A / Deals', data.deals.summary, data.deals.gptTake);
-
-    const quoteCard = document.createElement('div');
-    quoteCard.className = 'card';
-    quoteCard.innerHTML = `<h2>Quote of the Day</h2><p>${data.quote.text}</p>`;
-    content.appendChild(quoteCard);
+    document.getElementById('market').innerHTML = `<h2>Market Recap</h2><p>${data.marketRecap.longSummary}</p><p><strong>TL;DR:</strong> ${data.marketRecap.tldr}</p>`;
+    document.getElementById('headlines').innerHTML = '<h2>Headlines</h2>' + data.headlines.map(h => `<h3>${h.title}</h3><p>${h.summary}</p><p><em>${h.gptTake}</em></p>`).join('<hr>');
+    document.getElementById('deals').innerHTML = '<h2>M&A / IPOs</h2>' + data.deals.map(d => `<h3>${d.title}</h3><p>${d.summary}</p><p><em>${d.gptTake}</em></p>`).join('<hr>');
+    document.getElementById('events').innerHTML = `<h2>Economic Events</h2><ul>${data.events.map(e => `<li>${e}</li>`).join('')}</ul>`;
+    document.getElementById('gpt').innerHTML = `<h2>GPT Daily Take</h2><p>${data.gptAnalysis}</p>`;
 });

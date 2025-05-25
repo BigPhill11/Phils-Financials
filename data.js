@@ -1,30 +1,28 @@
 
 const data = {
     marketRecap: {
-        summary: "S&P 500 up 0.8%, Nasdaq gains 1.2%, 10Y yield at 4.23%",
-        gptTake: "Markets rallied on optimism around tech earnings and expectations that the Fed may pause rate hikes soon."
+        longSummary: "Markets moved sharply today following the release of new inflation data and key earnings reports. The S&P 500 gained 1.2% after CPI came in slightly below expectations, sparking renewed optimism about a potential Fed rate cut. Nasdaq led the rally thanks to strong tech earnings, especially from Nvidia and Microsoft. Bond yields fell as investors shifted into equities. Crude oil dipped on concerns of slowing global demand. All eyes are now on Friday's jobs report for confirmation of labor market softening.",
+        tldr: "Stocks rose on cooling inflation and big tech earnings; yields and oil fell."
     },
     headlines: [
         {
-            title: "Fed Minutes Signal Potential Pause",
-            summary: "Federal Reserve officials are signaling a more cautious stance on further interest rate hikes.",
-            gptTake: "This could indicate growing concerns over economic slowdown and a shift toward rate stability."
+            title: "Fed Hints at Holding Rates Steady",
+            summary: "Federal Reserve officials expressed growing concern about overtightening as inflation cools.",
+            gptTake: "This signals a potential policy shift; expect increased focus on employment metrics going forward."
         },
         {
-            title: "Amazon Beats Earnings Expectations",
-            summary: "Amazon posted stronger-than-expected Q1 earnings, driven by growth in AWS and advertising.",
-            gptTake: "Positive for tech sector sentiment and a signal of robust consumer and enterprise demand."
+            title: "Nvidia Smashes Earnings Expectations",
+            summary: "Nvidia's Q1 report showed revenue doubling year-over-year, driven by AI chip demand.",
+            gptTake: "Strong earnings reinforce Nvidia's leadership in the AI arms race and boost broader tech sentiment."
         }
     ],
-    events: {
-        today: ["Consumer Sentiment Index release at 10AM", "Apple earnings call at 4:30PM"],
-        gptTake: "Sentiment data could sway short-term market direction; Apple earnings will be key for tech momentum."
-    },
-    deals: {
-        summary: "Tesla acquires battery startup VoltEdge in $1.2B deal.",
-        gptTake: "Signals Tesla's ambition to vertically integrate battery supply and reduce dependency on external suppliers."
-    },
-    quote: {
-        text: "In investing, what is comfortable is rarely profitable. – Robert Arnott"
-    }
+    deals: [
+        {
+            title: "Oracle Acquires DataEdge in $3.2B Deal",
+            summary: "Oracle expands its cloud footprint by acquiring analytics firm DataEdge.",
+            gptTake: "This move strengthens Oracle’s AI and data infrastructure, setting up deeper competition with Microsoft Azure."
+        }
+    ],
+    events: ["Fed Chair Powell speaks at 2PM", "Initial Jobless Claims released at 8:30AM"],
+    gptAnalysis: "Markets are currently balancing between optimism from strong earnings and caution from soft economic signals. The next move likely depends on Friday’s labor market data and upcoming Fed commentary."
 };
