@@ -34,4 +34,3 @@ jobs:
           git add data.js
           git commit -m "Automated data update"
           git push
-Add GitHub Action for daily updates
