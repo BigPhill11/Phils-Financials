@@ -1,0 +1,36 @@
+name: Update Daily Data
+
+on:
+  schedule:
+    - cron: '0 12 * * *'  # Runs daily at 12:00 UTC (8am EST)
+  workflow_dispatch:  # Optional: run manually from Actions tab
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install requests openai
+
+      - name: Run update script
+        env:
+          MARKETSTACK_KEY: ${{ secrets.MARKETSTACK_KEY }}
+          NEWSAPI_KEY: ${{ secrets.NEWSAPI_KEY }}
+          OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
+        run: python update_data.py
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add data.js
+          git commit -m "Automated data update"
+          git push
