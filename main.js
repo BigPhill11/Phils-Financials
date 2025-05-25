@@ -1,4 +1,3 @@
-
 function showTab(id) {
     const tabs = document.querySelectorAll('.tab-content');
     tabs.forEach(tab => tab.style.display = 'none');
