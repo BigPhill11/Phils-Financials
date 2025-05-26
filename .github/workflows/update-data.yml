@@ -1,37 +1,14 @@
-name: Update Daily Data
+name: Trigger Netlify Build
 
 on:
   schedule:
-    - cron: '0 12 * * *'  # Runs daily at 8:00 AM Eastern Time (12:00 UTC)
+    - cron: '0 12 * * *'  # 8:00 AM ET (12:00 UTC)
   workflow_dispatch:
 
 jobs:
-  update-data:
+  trigger-netlify:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
-
-      - name: Install dependencies
-        run: pip install requests openai
-
-      - name: Run data update script
-        env:
-          OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
-          MARKETSTACK_KEY: ${{ secrets.MARKETSTACK_KEY }}
-          NEWSAPI_KEY: ${{ secrets.NEWSAPI_KEY }}
-        run: python update_data.py
-
-      - name: Commit and push changes
+      - name: Trigger Netlify build hook
         run: |
-          git config user.name "phils-bot"
-          git config user.email "bot@philsfinancials.com"
-          git add data.js
-          git commit -m "📈 Auto-update data.js" || echo "No changes to commit"
-          git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }} HEAD:main
+          curl -X POST https://api.netlify.com/build_hooks/68348ece6986883b973a90ef
