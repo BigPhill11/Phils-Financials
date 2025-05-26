@@ -1,3 +1,4 @@
+import os
 import requests
 import openai
 import json
@@ -26,6 +27,7 @@ def fetch_news():
         for article in response.json()['articles'][:3]:
             headlines.append({"title": article['title'], "summary": article['description']})
     return headlines
+
 def generate_gpt_summary(text):
     openai.api_key = OPENAI_KEY
     try:
@@ -46,9 +48,24 @@ def write_data_file(market_summary, headlines, analysis):
             "summary": market_summary,
             "gptTake": analysis
         },
-        "headlines": [],
+        "headlines": headlines,
         "events": {
             "today": ["Placeholder Event 1", "Placeholder Event 2"],
             "gptTake": "Events are placeholders for now."
         },
         "deals": {
+            "today": ["Placeholder Deal 1", "Placeholder Deal 2"],
+            "gptTake": "Deals are placeholders for now."
+        }
+    }
+
+    with open("data.js", "w") as f:
+        f.write("const data = ")
+        json.dump(output, f, indent=2)
+
+# Run the update
+market_summary = fetch_market_data()
+news = fetch_news()
+headline_text = " ".join([item['title'] for item in news])
+analysis = generate_gpt_summary(headline_text)
+write_data_file(market_summary, news, analysis)
