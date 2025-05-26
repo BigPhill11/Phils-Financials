@@ -2,12 +2,13 @@ name: Update Daily Data
 
 on:
   schedule:
-    - cron: '0 12 * * *'  # 8:00 AM Eastern Time (12:00 UTC)
+    - cron: '0 12 * * *'  # Runs daily at 8:00 AM Eastern Time (12:00 UTC)
   workflow_dispatch:
 
 jobs:
   update-data:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
@@ -32,6 +33,5 @@ jobs:
           git config user.name "phils-bot"
           git config user.email "bot@philsfinancials.com"
           git add data.js
-          git commit -m "📈 Auto-update data.js"
+          git commit -m "📈 Auto-update data.js" || echo "No changes to commit"
           git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }} HEAD:main
-
